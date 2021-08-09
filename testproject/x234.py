@@ -8,6 +8,7 @@ URL = "https://black-moss-0a0440e03.azurestaticapps.net/x234.html"
 driver.get(URL)
 
 
+# id alapján megkeresem a mezőket, kitörlöm, majd kitöltöm. Utána megnyomom a gombot, az eredményt adja vissza a függvény
 def fill_form(param_a, param_b):
     a = driver.find_element_by_id("a")
     b = driver.find_element_by_id("b")
