@@ -15,12 +15,12 @@ def fill_email(email):
     driver.find_element_by_id("email").clear()
     driver.find_element_by_id("email").send_keys(email)
     driver.find_element_by_id("submit").click()
-    hibauzenet = driver.find_elements_by_class_name("validation-error")
-    if (len(hibauzenet) < 1):
+    validation_errors = driver.find_elements_by_class_name("validation-error")
+    if len(validation_errors) < 1:
         return ""
     else:
-        if hibauzenet[0].is_enabled():
-            return hibauzenet[0].text
+        if validation_errors[0].is_enabled():
+            return validation_errors[0].text
         else:
             return ""
 
