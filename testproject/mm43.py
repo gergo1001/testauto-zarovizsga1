@@ -8,26 +8,28 @@ driver = webdriver.Chrome(ChromeDriverManager().install())
 URL = "https://black-moss-0a0440e03.azurestaticapps.net/mm43.html"
 
 driver.get(URL)
-#visszaadja a hibaüzenetet, de csak akkor ha látszik. Ha nincs hibaüzenet, vagy nem látszik, akkor üressel tér vissza
+
+
+# visszaadja a hibaüzenetet, de csak akkor ha látszik. Ha nincs hibaüzenet, vagy nem látszik, akkor üressel tér vissza
 def fill_email(email):
     driver.find_element_by_id("email").clear()
     driver.find_element_by_id("email").send_keys(email)
     driver.find_element_by_id("submit").click()
-    hibauzenet=driver.find_elements_by_class_name("validation-error")
-    if (len(hibauzenet)<1):
+    hibauzenet = driver.find_elements_by_class_name("validation-error")
+    if (len(hibauzenet) < 1):
         return ""
     else:
         if hibauzenet[0].is_enabled():
-            print(hibauzenet[0].text)
             return hibauzenet[0].text
         else:
             return ""
 
-#TC01
+
+# TC01
 assert "" == fill_email("teszt@elek.hu")
-#TC02
+# TC02
 assert 'Kérjük, adja meg a „@” utáni részt is. A(z) „teszt@” cím nem teljes.' == fill_email("teszt@")
-#TC03
+# TC03
 assert 'Kérjük, töltse ki ezt a mezőt.' == fill_email("")
 
-#
+driver.close()
